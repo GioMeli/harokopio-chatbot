@@ -5,11 +5,12 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 
+// Endpoint to handle chat requests from the frontend
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message;
 
   try {
-    const response = await axios.post('https://api.openai.com/v1/completions', {
+    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: userMessage }],
       max_tokens: 150,
@@ -27,6 +28,7 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
+// Start the server on port 5000
 app.listen(5000, () => {
   console.log('Server is running on port 5000');
 });
