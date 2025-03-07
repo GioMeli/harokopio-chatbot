@@ -1,47 +1,46 @@
 import React, { useState } from 'react';
 
-function Chatbot() {
+const Chatbot = () => {
+  const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const [messages, setMessages] = useState([
-    { sender: 'bot', text: 'Hello! How can I assist you with ISCA at Harokopeio University today?' }
-  ]);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setMessages([...messages, { sender: 'user', text: userInput }]);
-    setUserInput('');
+  const handleSend = () => {
+    if (userInput.trim()) {
+      // Display user's message
+      setMessages([...messages, { text: userInput, sender: 'user' }]);
+      
+      // Simulate a chatbot response
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: `Bot: I received: ${userInput}`, sender: 'bot' }
+      ]);
 
-    // Send user input to the backend
-    const response = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: userInput }),
-    });
-    const data = await response.json();
-    setMessages([...messages, { sender: 'user', text: userInput }, { sender: 'bot', text: data.response }]);
+      // Clear user input
+      setUserInput('');
+    }
   };
 
   return (
-    <div className="chatbox">
-      <div className="chat-window">
+    <div className="chatbot">
+      <div className="messages">
         {messages.map((msg, index) => (
           <div key={index} className={msg.sender}>
-            <p>{msg.text}</p>
+            <span>{msg.text}</span>
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit}>
+      <div className="input">
         <input
           type="text"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
-          placeholder="Ask me anything about ISCA!"
+          placeholder="Type your message"
         />
-        <button type="submit">Send</button>
-      </form>
+        <button onClick={handleSend}>Send</button>
+      </div>
     </div>
   );
-}
+};
 
 export default Chatbot;
 
