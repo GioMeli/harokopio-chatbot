@@ -1,19 +1,35 @@
 {
-  "name": "harokopeio-chatbot-backend",
+  "name": "harokopeio-chatbot-frontend",
   "version": "1.0.0",
-  "description": "Backend API for the Harokopeio University ISCA Chatbot",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
-    "axios": "^1.1.3",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3"
   },
-  "engines": {
-    "node": "14.x"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "author": "",
-  "license": "ISC"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
+
