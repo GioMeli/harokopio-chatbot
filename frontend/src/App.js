@@ -1,6 +1,7 @@
 import React from 'react';
-import Chatbot from './Chatbot.js'; // Make sure the path is correct
+import Chatbot from './components/Chatbot';  // If it's inside a 'components' folder
 import './styles.css'; // If you have styles for the chatbot
+
 
 function App() {
   return (
